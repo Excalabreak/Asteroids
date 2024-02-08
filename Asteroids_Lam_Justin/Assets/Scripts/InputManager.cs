@@ -9,9 +9,9 @@ using UnityEngine;
  */
 public class InputManager : MonoBehaviour
 {
-    PlayerControls _playerControls;
+    private PlayerControls _playerControls;
 
-    public Vector2 _moveInput;
+    private Vector2 _moveInput;
 
     /// <summary>
     /// on enable:
