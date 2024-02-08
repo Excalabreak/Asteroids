@@ -12,6 +12,8 @@ public class InputManager : MonoBehaviour
     private PlayerControls _playerControls;
 
     private Vector2 _moveInput;
+    private float _thrust;
+    private float _rotate;
 
     /// <summary>
     /// on enable:
@@ -32,11 +34,32 @@ public class InputManager : MonoBehaviour
         _playerControls.Enable();
     }
 
+    public void HandleAllInputs()
+    {
+        HandleMovementInput();
+    }
+
+    private void HandleMovementInput()
+    {
+        _thrust = _moveInput.y;
+        _rotate = _moveInput.x;
+    }
+
     /// <summary>
     /// disables _playerController when gameobject is disabled
     /// </summary>
     private void OnDisable()
     {
         _playerControls.Disable();
+    }
+
+    public float thrust
+    {
+        get { return _thrust; }
+    }
+
+    public float rotate
+    {
+        get { return _rotate; }
     }
 }
