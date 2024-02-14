@@ -4,16 +4,33 @@ using UnityEngine;
 
 /*
  * Author: [Lam, Justin]
- * Last Updated: [02/07/2024]
+ * Last Updated: [02/13/2024]
  * [gets all the inputs from the input system and calls functions to handle them]
  */
 public class InputManager : MonoBehaviour
 {
+    //input action
     private PlayerControls _playerControls;
 
+    //needed components
+    private ShootScript _shootScript;
+
+    //movement
     private Vector2 _moveInput;
     private float _thrust;
     private float _rotate;
+
+    //actions
+    private bool _shoot = false;
+    //private bool _hyperSpace;
+
+    /// <summary>
+    /// get needed components
+    /// </summary>
+    private void Awake()
+    {
+        _shootScript = GetComponent<ShootScript>();
+    }
 
     /// <summary>
     /// on enable:
@@ -29,20 +46,41 @@ public class InputManager : MonoBehaviour
             _playerControls = new PlayerControls();
 
             _playerControls.PlayerMovement.Movement.performed += context => _moveInput = context.ReadValue<Vector2>();
+
+            _playerControls.PlayerAction.Shoot.performed += context => _shoot = true;
         }
 
         _playerControls.Enable();
     }
 
+    /// <summary>
+    /// calls all functions for inputs
+    /// </summary>
     public void HandleAllInputs()
     {
         HandleMovementInput();
+        HandleShootInput();
     }
 
+    /// <summary>
+    /// sets movement variables from inputs
+    /// </summary>
     private void HandleMovementInput()
     {
         _thrust = _moveInput.y;
         _rotate = _moveInput.x;
+    }
+
+    /// <summary>
+    /// calls to shoot when inputted
+    /// </summary>
+    private void HandleShootInput()
+    {
+        if (_shoot)
+        {
+            _shoot = false;
+            _shootScript.Shoot();
+        }
     }
 
     /// <summary>
@@ -53,11 +91,17 @@ public class InputManager : MonoBehaviour
         _playerControls.Disable();
     }
 
+    /// <summary>
+    /// property to get _thrust
+    /// </summary>
     public float thrust
     {
         get { return _thrust; }
     }
 
+    /// <summary>
+    /// property to get _rotate
+    /// </summary>
     public float rotate
     {
         get { return _rotate; }

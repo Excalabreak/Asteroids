@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 4508936670059023592}
   - component: {fileID: 5630700929706293}
   - component: {fileID: 9084768768345407557}
+  - component: {fileID: 3950609502419846127}
+  - component: {fileID: 283465363695488831}
   m_Layer: 0
   m_Name: PlayerContainer
   m_TagString: Untagged
@@ -61,7 +63,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!114 &4508936670059023592
 MonoBehaviour:
@@ -102,6 +104,32 @@ MonoBehaviour:
   _fire: {fileID: 7816848520653175713}
   _thrustForce: 12
   _rotateSpeed: 360
+--- !u!114 &3950609502419846127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3711656762722241237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82eb4277c425e1549b12a7a63078b8a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &283465363695488831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3711656762722241237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee3f8a45462c69b4bb6d80517a8a3a25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bulletPrefab: {fileID: 669284938061522536, guid: 5f7fb81ab4ae1b94f82b5f57de85f09b,
+    type: 3}
 --- !u!1001 &2588060708274848646
 PrefabInstance:
   m_ObjectHideFlags: 0
