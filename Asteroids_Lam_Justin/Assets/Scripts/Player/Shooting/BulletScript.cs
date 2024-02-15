@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
  * Author: [Lam, Justin]
- * Last Updated: [02/13/2024]
+ * Last Updated: [02/14/2024]
  * [bullets will move forward until time or they collide with something]
  */
 
@@ -31,11 +31,10 @@ public class BulletScript : MonoBehaviour
     }
 
     /// <summary>
-    /// on collision enter:
-    /// destroy self
+    /// destroy self when triggered
     /// </summary>
-    /// <param name="collision"></param>
-    private void OnCollisionEnter(Collision collision)
+    /// <param name="other"></param>
+    private void OnTriggerEnter(Collider other)
     {
         Destroy(gameObject);
     }

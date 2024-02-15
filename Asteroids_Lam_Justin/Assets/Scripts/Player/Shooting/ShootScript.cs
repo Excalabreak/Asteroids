@@ -20,6 +20,6 @@ public class ShootScript : MonoBehaviour
     {
         Vector3 spawn = transform.position + (transform.up * 0.75f);
 
-        Instantiate(_bulletPrefab, spawn, transform.rotation);
+        GameObject bullet = Instantiate(_bulletPrefab, spawn, transform.rotation);
     }
 }
