@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
  * Author: [Lam, Justin]
- * Last Updated: [02/14/2024]
+ * Last Updated: [02/15/2024]
  * [script for asteroid enemies]
  */
 
@@ -30,8 +30,6 @@ public class AsteroidScript : BaseEnemyScript
         //if the meteor was more thant just a circle
         transform.Rotate(Vector3.forward * Random.Range(0f, 359f));
         _direction = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f).normalized;
-
-        Debug.Log("spawn" + gameObject.name);
 
         _rigidbody.velocity = _direction * _speed;
     }

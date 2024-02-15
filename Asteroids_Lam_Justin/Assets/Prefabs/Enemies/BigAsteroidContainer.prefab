@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3232878593945549977}
   m_Layer: 0
   m_Name: BigAsteroidContainer
-  m_TagString: Enemy
+  m_TagString: Asteroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,6 +88,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 1.5
   _points: 10
+  _tag: Asteroid
   _nextAsteroidPrefab: {fileID: 4185367702787959349, guid: 19c795ec98d6dfa4ea9f9557def3e8b4,
     type: 3}
 --- !u!1001 &1224436872743465531
@@ -102,6 +103,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BigAsteroidModel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4401452542807935462, guid: 592681e6751b43443b20769597992611,
+        type: 3}
+      propertyPath: m_TagString
+      value: Asteroid
       objectReference: {fileID: 0}
     - target: {fileID: 5190717513411678220, guid: 592681e6751b43443b20769597992611,
         type: 3}

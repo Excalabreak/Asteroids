@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 /*
  * Author: [Lam, Justin]
- * Last Updated: [02/14/2024]
+ * Last Updated: [02/15/2024]
  * [base class for all enemies to inherit from]
  */
 
@@ -12,6 +13,7 @@ public class BaseEnemyScript : MonoBehaviour
 {
     [SerializeField] protected float _speed;
     [SerializeField] protected int _points;
+    [SerializeField] protected EnemyType _enemyType;
 
     /// <summary>
     /// when any enemy dies:
@@ -30,7 +32,7 @@ public class BaseEnemyScript : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag != "Enemy")
+        if (other.gameObject.tag != _enemyType.ToString())
         {
             OnDeath();
         }
