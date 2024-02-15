@@ -20,7 +20,7 @@ public class BaseEnemyScript : MonoBehaviour
     /// </summary>
     protected virtual void OnDeath()
     {
-        //add points to score
+        PlayerData.Instance.AddScore(_points);
         Destroy(gameObject);
     }
 
