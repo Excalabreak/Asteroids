@@ -20,7 +20,7 @@ public class BigUFOScript : BaseUFOScript
         if (!_inCooldown)
         {
             Vector3 spawnLocation = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f).normalized;
-            spawnLocation = transform.position + (spawnLocation * 1.5f);
+            spawnLocation = new Vector3(transform.position.x, transform.position.y, 0f) + (spawnLocation * 1.5f);
 
             Vector3 bulletDirection = spawnLocation - transform.position;
             float angle = Vector3.Angle(bulletDirection, transform.up);
@@ -30,7 +30,7 @@ public class BigUFOScript : BaseUFOScript
                 angle = angle * -1;
             }
 
-            GameObject bullet = Instantiate(_bulletPrefab, spawnLocation, Quaternion.Euler(0f, 0f, angle));
+            GameObject bullet = Instantiate(_bulletPrefab, spawnLocation, Quaternion.Euler(0f, 0f, angle), null);
             base.Shoot();
         }
     }
