@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
  * Author: [Lam, Justin]
- * Last Updated: [02/14/2024]
+ * Last Updated: [02/15/2024]
  * [bullets will move forward until time or they collide with something]
  */
 
