@@ -39,9 +39,9 @@ public class BaseUFOScript : BaseEnemyScript
         int randomNum = Random.Range(0,2);
         if (randomNum == 0)
         {
-            //_goingRight = false;
+            _goingRight = false;
 
-            //_speed = _speed * -1;
+            _speed = _speed * -1;
         }
     }
 
@@ -54,7 +54,7 @@ public class BaseUFOScript : BaseEnemyScript
     {
         if (_ready)
         {
-            //Move();
+            Move();
             Shoot();
         }
     }
