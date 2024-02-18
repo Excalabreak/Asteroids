@@ -15,6 +15,9 @@ public class BaseEnemyScript : MonoBehaviour
     [SerializeField] protected int _points;
     [SerializeField] protected EnemyType _enemyType;
 
+    //makes sure only hit's once
+    private bool _hasHit = false;
+
     /// <summary>
     /// when any enemy dies:
     /// send points to player data
@@ -32,8 +35,9 @@ public class BaseEnemyScript : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag != _enemyType.ToString())
+        if (!_hasHit && other.gameObject.tag != _enemyType.ToString())
         {
+            _hasHit = true;
             OnDeath();
         }
     }

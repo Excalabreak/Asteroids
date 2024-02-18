@@ -96,6 +96,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HyperSpace"",
+                    ""type"": ""Button"",
+                    ""id"": ""cf81800e-2fd1-432c-bd9e-b409f29e2b81"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -107,6 +116,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8ecb20d1-2de5-48cb-acd4-7c6841a02779"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HyperSpace"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -121,6 +141,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // PlayerAction
         m_PlayerAction = asset.FindActionMap("PlayerAction", throwIfNotFound: true);
         m_PlayerAction_Shoot = m_PlayerAction.FindAction("Shoot", throwIfNotFound: true);
+        m_PlayerAction_HyperSpace = m_PlayerAction.FindAction("HyperSpace", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -229,11 +250,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerAction;
     private List<IPlayerActionActions> m_PlayerActionActionsCallbackInterfaces = new List<IPlayerActionActions>();
     private readonly InputAction m_PlayerAction_Shoot;
+    private readonly InputAction m_PlayerAction_HyperSpace;
     public struct PlayerActionActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerActionActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Shoot => m_Wrapper.m_PlayerAction_Shoot;
+        public InputAction @HyperSpace => m_Wrapper.m_PlayerAction_HyperSpace;
         public InputActionMap Get() { return m_Wrapper.m_PlayerAction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -246,6 +269,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Shoot.started += instance.OnShoot;
             @Shoot.performed += instance.OnShoot;
             @Shoot.canceled += instance.OnShoot;
+            @HyperSpace.started += instance.OnHyperSpace;
+            @HyperSpace.performed += instance.OnHyperSpace;
+            @HyperSpace.canceled += instance.OnHyperSpace;
         }
 
         private void UnregisterCallbacks(IPlayerActionActions instance)
@@ -253,6 +279,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Shoot.started -= instance.OnShoot;
             @Shoot.performed -= instance.OnShoot;
             @Shoot.canceled -= instance.OnShoot;
+            @HyperSpace.started -= instance.OnHyperSpace;
+            @HyperSpace.performed -= instance.OnHyperSpace;
+            @HyperSpace.canceled -= instance.OnHyperSpace;
         }
 
         public void RemoveCallbacks(IPlayerActionActions instance)
@@ -277,5 +306,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IPlayerActionActions
     {
         void OnShoot(InputAction.CallbackContext context);
+        void OnHyperSpace(InputAction.CallbackContext context);
     }
 }

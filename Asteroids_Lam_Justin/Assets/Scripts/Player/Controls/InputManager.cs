@@ -14,6 +14,7 @@ public class InputManager : MonoBehaviour
 
     //needed components
     private ShootScript _shootScript;
+    private HyperSpaceScript _hyperSpaceScript;
 
     //movement
     private Vector2 _moveInput;
@@ -22,7 +23,7 @@ public class InputManager : MonoBehaviour
 
     //actions
     private bool _shoot = false;
-    //private bool _hyperSpace;
+    private bool _hyperSpace;
 
     /// <summary>
     /// get needed components
@@ -30,6 +31,7 @@ public class InputManager : MonoBehaviour
     private void Awake()
     {
         _shootScript = GetComponent<ShootScript>();
+        _hyperSpaceScript = GetComponent<HyperSpaceScript>();
     }
 
     /// <summary>
@@ -48,6 +50,7 @@ public class InputManager : MonoBehaviour
             _playerControls.PlayerMovement.Movement.performed += context => _moveInput = context.ReadValue<Vector2>();
 
             _playerControls.PlayerAction.Shoot.performed += context => _shoot = true;
+            _playerControls.PlayerAction.HyperSpace.performed += context => _hyperSpace = true;
         }
 
         _playerControls.Enable();
@@ -60,6 +63,7 @@ public class InputManager : MonoBehaviour
     {
         HandleMovementInput();
         HandleShootInput();
+        HandleHyperSpaceInput();
     }
 
     /// <summary>
@@ -80,6 +84,15 @@ public class InputManager : MonoBehaviour
         {
             _shoot = false;
             _shootScript.Shoot();
+        }
+    }
+
+    private void HandleHyperSpaceInput()
+    {
+        if (_hyperSpace)
+        {
+            _hyperSpace = false;
+            _hyperSpaceScript.Teleport();
         }
     }
 
