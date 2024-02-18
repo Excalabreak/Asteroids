@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
  * Author: [Lam, Justin]
- * Last Updated: [02/15/2024]
+ * Last Updated: [02/18/2024]
  * [base class for all UFO enemies]
  */
 
@@ -21,7 +21,7 @@ public class BaseUFOScript : BaseEnemyScript
     [SerializeField] protected GameObject _bulletPrefab;
 
     //move var
-    protected bool _ready = false;
+    protected bool _ready = true;
     protected bool _goingRight = true;
     protected bool _attemptingManuvers = false;
     protected float _minRandDelay = 0f;
@@ -50,11 +50,11 @@ public class BaseUFOScript : BaseEnemyScript
     /// calls to move every frame
     /// calls to shoot every frame
     /// </summary>
-    protected void Update()
+    protected virtual void Update()
     {
         if (_ready)
         {
-            Move();
+            //Move();
             Shoot();
         }
     }
@@ -100,7 +100,7 @@ public class BaseUFOScript : BaseEnemyScript
         }
     }
 
-    public void ReadyMove()
+    public void Ready()
     {
         _ready = true;
     }
