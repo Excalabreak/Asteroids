@@ -24,7 +24,6 @@ public class PlayerDeathScript : MonoBehaviour
         if (!_hasHit)
         {
             _hasHit = true;
-            Debug.Log("hit");
             PlayerData.Instance.LoseLife();
             Destroy(gameObject);
         }

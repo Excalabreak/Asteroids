@@ -20,6 +20,14 @@ public class PlayerSpawnScript : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        Blink();
+    }
+
+    /// <summary>
+    /// so player can blink when called
+    /// </summary>
+    public void Blink()
+    {
         StartCoroutine(SpawnBlink());
     }
 
