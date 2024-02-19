@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
  * Author: [Lam, Justin]
- * Last Updated: [02/18/2024]
+ * Last Updated: [02/14/2024]
  * [Manages all player data]
  */
 
@@ -20,23 +20,18 @@ public class PlayerData : Singleton<PlayerData>
     //if designer wants to change score
     [SerializeField] private int _maxLives = 3;
 
-    private bool _gotNewHighScore = false;
-
     /// <summary>
     /// called to update lives when player dies
     /// </summary>
     public void LoseLife()
     {
         _numberOfLives--;
-        UIManager.Instance.UpdateGameUI();
+
         if (_numberOfLives <= 0)
         {
             OnGameOver();
         }
-        else
-        {
-            GameManager.Instance.SpawnPlayer();
-        }
+        //call to update UI
     }
 
     /// <summary>
@@ -46,8 +41,7 @@ public class PlayerData : Singleton<PlayerData>
     public void AddScore(int score)
     {
         _currentScore += score;
-        CheckNewHighScore();
-        UIManager.Instance.UpdateGameUI();
+        //call to update UI
     }
 
     /// <summary>
@@ -57,8 +51,24 @@ public class PlayerData : Singleton<PlayerData>
     public void NextLevel()
     {
         _currentLevel++;
-        UIManager.Instance.UpdateGameUI();
-        EnemyManager.Instance.SpawnEnemies();
+
+        if (_currentLevel >= 3)
+        {
+            OnGameWin();
+        }
+        else
+        {
+            //call for next level
+        }
+    }
+
+    /// <summary>
+    /// called when player wins
+    /// </summary>
+    private void OnGameWin()
+    {
+        CheckNewHighScore();
+        //call to update UI
     }
 
     /// <summary>
@@ -67,8 +77,7 @@ public class PlayerData : Singleton<PlayerData>
     private void OnGameOver()
     {
         CheckNewHighScore();
-        UIManager.Instance.UpdateGameUI();
-        UIManager.Instance.ShowGameOverUI(_gotNewHighScore);
+        //call to update UI
     }
 
     /// <summary>
@@ -79,12 +88,12 @@ public class PlayerData : Singleton<PlayerData>
         if (_currentScore > _highScore)
         {
             _highScore = _currentScore;
-            _gotNewHighScore = true;
+            //call to update UI
         }
-        UIManager.Instance.UpdateGameUI();
+        //call to update UI
     }
 
-    public void ResetGame()
+    private void ResetGame()
     {
         _numberOfLives = _maxLives;
         _currentScore = 0;
