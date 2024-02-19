@@ -41,6 +41,9 @@ public class SmallUFOScript : BaseUFOScript
         }
     }
 
+    /// <summary>
+    /// constantly getting player location
+    /// </summary>
     protected override void Update()
     {
         if (_playerLocation == null)

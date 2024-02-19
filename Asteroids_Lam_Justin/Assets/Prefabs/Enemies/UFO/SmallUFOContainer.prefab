@@ -92,7 +92,7 @@ MonoBehaviour:
   _cooldownTime: 1
   _bulletPrefab: {fileID: 669284938061522536, guid: 5f7fb81ab4ae1b94f82b5f57de85f09b,
     type: 3}
-  _accuracyMod: 5500
+  _accuracyMod: 2000
   _accuracyExtremes: 15
 --- !u!1001 &7865586650064691285
 PrefabInstance:

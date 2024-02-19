@@ -87,11 +87,15 @@ public class PlayerData : Singleton<PlayerData>
         UIManager.Instance.UpdateGameUI();
     }
 
+    /// <summary>
+    /// resets the player data vars
+    /// </summary>
     public void ResetGame()
     {
         _numberOfLives = _maxLives;
         _currentScore = 0;
         _currentLevel = 0;
+        _gotNewHighScore = false;
     }
 
     /// <summary>

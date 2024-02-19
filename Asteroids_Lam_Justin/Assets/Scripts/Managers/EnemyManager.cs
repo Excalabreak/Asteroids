@@ -29,13 +29,16 @@ public class EnemyManager : Singleton<EnemyManager>
     /// <summary>
     /// sets up list
     /// </summary>
-    public override void Awake()
+    private void Start()
     {
-        base.Awake();
-
         _currentAsteroids = new List<GameObject>();
     }
 
+    /// <summary>
+    /// every frame:
+    /// check if level is complete
+    /// check if need to spawn a UFO
+    /// </summary>
     private void Update()
     {
         if (GameManager.Instance.playing && _currentAsteroids.Count <= 0 && _currentUFO == null)
@@ -73,16 +76,27 @@ public class EnemyManager : Singleton<EnemyManager>
         startSpawningUFO = true;
     }
 
+    /// <summary>
+    /// removes asteriod to list
+    /// </summary>
+    /// <param name="asteroid">asteroid being removed</param>
     public void RemoveAsteroid(GameObject asteroid)
     {
         _currentAsteroids.Remove(asteroid);
     }
 
+    /// <summary>
+    /// adds asteroid to list
+    /// </summary>
+    /// <param name="asteroid">asteroid being added</param>
     public void AddAsteroid(GameObject asteroid)
     {
         _currentAsteroids.Add(asteroid);
     }
 
+    /// <summary>
+    /// removes all the asteroid in list and ufos
+    /// </summary>
     public void RemoveAllEnemies()
     {
         if (_currentAsteroids.Count > 0)

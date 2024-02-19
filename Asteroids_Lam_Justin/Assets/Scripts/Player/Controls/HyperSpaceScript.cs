@@ -14,6 +14,9 @@ public class HyperSpaceScript : MonoBehaviour
     [SerializeField] private float _teleportTime = 0.1f;
     private bool _isTeleporting = false;
 
+    /// <summary>
+    /// checks if player is teleporting then starts the coroutine
+    /// </summary>
     public void Teleport()
     {
         if (!_isTeleporting)
@@ -23,6 +26,10 @@ public class HyperSpaceScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// teleports player to random space
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator Blink()
     {
         _model.SetActive(false);

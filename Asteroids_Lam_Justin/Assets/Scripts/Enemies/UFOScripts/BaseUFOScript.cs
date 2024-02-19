@@ -86,6 +86,9 @@ public class BaseUFOScript : BaseEnemyScript
         }
     }
 
+    /// <summary>
+    /// checks when the UFO has gone accross and off screen 
+    /// </summary>
     protected void CheckOffScreen()
     {
         Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
@@ -100,6 +103,9 @@ public class BaseUFOScript : BaseEnemyScript
         }
     }
 
+    /// <summary>
+    /// call when the UFO is ready to move
+    /// </summary>
     public void Ready()
     {
         _ready = true;
@@ -143,6 +149,9 @@ public class BaseUFOScript : BaseEnemyScript
         _attemptingManuvers = false;
     }
 
+    /// <summary>
+    /// get which direction the UFO is going
+    /// </summary>
     public bool goingRight
     {
         get { return _goingRight; }
