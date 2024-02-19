@@ -65,6 +65,9 @@ public class UIManager : Singleton<UIManager>
         _quitButtonPos.anchoredPosition = new Vector2(0, -120);
     }
 
+    /// <summary>
+    /// shows game ui
+    /// </summary>
     public void ShowGameUI()
     {
         HideAllUI();
@@ -74,6 +77,10 @@ public class UIManager : Singleton<UIManager>
         _highScoreGameText.enabled = true;
     }
 
+    /// <summary>
+    /// shows game over screen
+    /// </summary>
+    /// <param name="newHighScore"></param>
     public void ShowGameOverUI(bool newHighScore)
     {
         HideAllUI();
@@ -101,6 +108,9 @@ public class UIManager : Singleton<UIManager>
         _quitButtonPos.anchoredPosition = new Vector2(0, -80);
     }    
 
+    /// <summary>
+    /// updates all game ui
+    /// </summary>
     public void UpdateGameUI()
     {
         _levelText.text = "Level: " + PlayerData.Instance.currentLevel;

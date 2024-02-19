@@ -21,7 +21,7 @@ public class BaseUFOScript : BaseEnemyScript
     [SerializeField] protected GameObject _bulletPrefab;
 
     //move var
-    protected bool _ready = true;
+    protected bool _ready = false;
     protected bool _goingRight = true;
     protected bool _attemptingManuvers = false;
     protected float _minRandDelay = 0f;
@@ -125,17 +125,16 @@ public class BaseUFOScript : BaseEnemyScript
         _attemptingManuvers = true;
         yield return new WaitForSeconds(Random.Range(_minRandDelay, _maxRandDelay));
 
-        int randomNum = Random.Range(0, 4);
+        int randomNum = Random.Range(0, 3);
         switch (randomNum)
         {
             case 0:
-            case 1:
                 _rigidbody.velocity = Vector3.zero;
                 break;
-            case 2:
+            case 1:
                 _rigidbody.velocity = Vector3.up * _speed;
                 break;
-            case 3:
+            case 2:
                 _rigidbody.velocity = Vector3.down * _speed;
                 break;
             default:

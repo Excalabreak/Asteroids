@@ -66,6 +66,7 @@ public class PlayerData : Singleton<PlayerData>
     /// </summary>
     private void OnGameOver()
     {
+        GameManager.Instance.PlayingStopped();
         CheckNewHighScore();
         UIManager.Instance.UpdateGameUI();
         UIManager.Instance.ShowGameOverUI(_gotNewHighScore);

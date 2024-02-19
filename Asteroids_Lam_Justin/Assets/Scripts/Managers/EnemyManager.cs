@@ -19,6 +19,8 @@ public class EnemyManager : Singleton<EnemyManager>
     private List<GameObject> _currentAsteroids;
     private GameObject _currentUFO;
 
+    
+
     //ufo random spawn variables
     [SerializeField] private float _maxUFOSpawnDelay = 10f;
     private bool startSpawningUFO = false;
@@ -34,12 +36,27 @@ public class EnemyManager : Singleton<EnemyManager>
         _currentAsteroids = new List<GameObject>();
     }
 
+    private void Update()
+    {
+        if (GameManager.Instance.playing && _currentAsteroids.Count <= 0 && _currentUFO == null)
+        {
+            GameManager.Instance.OnLevelComplete();
+            startSpawningUFO = false;
+            spawningUFO = false;
+        }
+
+        if (startSpawningUFO && !spawningUFO && _currentAsteroids.Count > 0 && _currentUFO == null)
+        {
+            SpawnUFO();
+        }
+    }
+
     /// <summary>
     /// spawns asteroids and starts UFO cycle
     /// </summary>
     public void SpawnEnemies()
     {
-        int asteroidAmount = 1 + PlayerData.Instance.currentLevel - 1;
+        int asteroidAmount = 3 + PlayerData.Instance.currentLevel - 1;
 
         for (int index = 0; index < asteroidAmount; index++)
         {
@@ -55,15 +72,40 @@ public class EnemyManager : Singleton<EnemyManager>
         StartCoroutine(SpawnUFO(_maxUFOSpawnDelay));
         startSpawningUFO = true;
     }
-    /*
-     * note:
-     * when spawning ufo:
-     * delay from start of the level
-     * spawn off of one side of the screen
-     * when destroid, random delay till next saucer (next saucer is random)
-     * repeat
-     * spawn from one side of the screen
-     */
+
+    public void RemoveAsteroid(GameObject asteroid)
+    {
+        _currentAsteroids.Remove(asteroid);
+    }
+
+    public void AddAsteroid(GameObject asteroid)
+    {
+        _currentAsteroids.Add(asteroid);
+    }
+
+    public void RemoveAllEnemies()
+    {
+        if (_currentAsteroids.Count > 0)
+        {
+            for (int index = _currentAsteroids.Count - 1; index >= 0; index--)
+            {
+                Destroy(_currentAsteroids[index]);
+                _currentAsteroids.RemoveAt(index);
+            }
+        }
+        startSpawningUFO = false;
+        spawningUFO = false;
+        Destroy(_currentUFO);
+    }
+
+    /// <summary>
+    /// calls to spawn UFO after random delay
+    /// </summary>
+    private void SpawnUFO()
+    {
+        float spawnDelay = Random.Range(0f, _maxUFOSpawnDelay);
+        StartCoroutine(SpawnUFO(spawnDelay));
+    }
 
     /// <summary>
     /// Instantiates UFO Prefab after a delay
@@ -75,7 +117,7 @@ public class EnemyManager : Singleton<EnemyManager>
         spawningUFO = true;
         yield return new WaitForSeconds(seconds);
 
-        float randomNum = Random.Range(0, 1);
+        float randomNum = Random.Range(0f, 1f);
         Vector3 topRight = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
         Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(new Vector3(0f, 0f, 0f));
 
@@ -85,7 +127,7 @@ public class EnemyManager : Singleton<EnemyManager>
         }
         else
         {
-            _currentUFO = Instantiate(_smallUFOPrefab, new Vector3(0f, topRight.y + 5, 0f), Quaternion.identity);
+            _currentUFO = Instantiate(_bigUFOPrefab, new Vector3(0f, topRight.y + 5, 0f), Quaternion.identity);
         }
 
         BaseUFOScript currentUFOScript = _currentUFO.GetComponent<BaseUFOScript>(); 
@@ -95,7 +137,10 @@ public class EnemyManager : Singleton<EnemyManager>
         }
         else
         {
-            _currentUFO.transform.position = new Vector3(topRight.x - 5, Random.Range(bottomLeft.y, topRight.y), 0f);
+            _currentUFO.transform.position = new Vector3(topRight.x + 5, Random.Range(bottomLeft.y, topRight.y), 0f);
         }
+
+        currentUFOScript.Ready();
+        spawningUFO = false;
     }
 }

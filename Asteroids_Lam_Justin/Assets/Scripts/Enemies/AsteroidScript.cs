@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
  * Author: [Lam, Justin]
- * Last Updated: [02/15/2024]
+ * Last Updated: [02/18/2024]
  * [script for asteroid enemies]
  */
 
@@ -45,7 +45,12 @@ public class AsteroidScript : BaseEnemyScript
         {
             GameObject spawn1 = Instantiate(_nextAsteroidPrefab, transform.position, Quaternion.identity);
             GameObject spawn2 = Instantiate(_nextAsteroidPrefab, transform.position, Quaternion.identity);
+
+            EnemyManager.Instance.AddAsteroid(spawn1);
+            EnemyManager.Instance.AddAsteroid(spawn2);
         }
+
+        EnemyManager.Instance.RemoveAsteroid(this.gameObject);
 
         base.OnDeath();
     }

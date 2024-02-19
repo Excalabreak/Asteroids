@@ -14,6 +14,8 @@ public class GameManager : Singleton<GameManager>
 
     private GameObject _currentPlayer;
 
+    private bool _playing = false;
+
     /// <summary>
     /// starts game on title screen
     /// </summary>
@@ -29,12 +31,29 @@ public class GameManager : Singleton<GameManager>
     /// </summary>
     public void Play()
     {
-        Debug.Log("hi");
+        EnemyManager.Instance.RemoveAllEnemies();
         PlayerData.Instance.ResetGame();
         UIManager.Instance.ShowGameUI();
 
         SpawnPlayer();
         PlayerData.Instance.NextLevel();
+        _playing = true;
+    }
+
+    public void OnLevelComplete()
+    {
+        _currentPlayer.GetComponent<PlayerSpawnScript>().Blink();
+        PlayerData.Instance.NextLevel();
+    }
+
+    public void PlayingStopped()
+    {
+        _playing = false;
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 
     public void SpawnPlayer()
@@ -45,5 +64,10 @@ public class GameManager : Singleton<GameManager>
     public GameObject currentPlayer
     {
         get { return _currentPlayer; }
+    }
+
+    public bool playing
+    {
+        get { return _playing; }
     }
 }
