@@ -5,7 +5,9 @@ using UnityEngine;
 /*
  * Author: [Lam, Justin]
  * Last Updated: [02/18/2024]
- * [Manages all player data]
+ * [Manages all player data.
+ * i didnt think about save and load
+ * until last... good thing it's optional]
  */
 
 public class PlayerData : Singleton<PlayerData>

@@ -23,7 +23,6 @@ public class UIManager : Singleton<UIManager>
     //buttons
     [SerializeField] private GameObject _playButton;
     [SerializeField] private TMP_Text _playText;
-    [SerializeField] private GameObject _loadButton;
     [SerializeField] private GameObject _quitButton;
     [SerializeField] private RectTransform _quitButtonPos;
 
@@ -39,7 +38,6 @@ public class UIManager : Singleton<UIManager>
         _titleText.enabled = false;
         _highScoreTitleText.enabled = false;
         _playButton.SetActive(false);
-        _loadButton.SetActive(false);
         _quitButton.SetActive(false);
     }
 
@@ -59,10 +57,7 @@ public class UIManager : Singleton<UIManager>
         _playButton.SetActive(true);
         _playText.text = "Play";
 
-        _loadButton.SetActive(true);
-
         _quitButton.SetActive(true);
-        _quitButtonPos.anchoredPosition = new Vector2(0, -120);
     }
 
     /// <summary>
