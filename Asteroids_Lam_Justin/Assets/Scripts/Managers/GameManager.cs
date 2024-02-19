@@ -20,6 +20,7 @@ public class GameManager : Singleton<GameManager>
     public override void Awake()
     {
         base.Awake();
+
         UIManager.Instance.ShowTitleScreen();
     }
 
@@ -29,7 +30,6 @@ public class GameManager : Singleton<GameManager>
     /// </summary>
     public void Play()
     {
-        Debug.Log("hi");
         PlayerData.Instance.ResetGame();
         UIManager.Instance.ShowGameUI();
 
